@@ -1,15 +1,15 @@
 ---
 name: sync-skills
-description: Pull the latest skills from the ai_skillz GitHub repo and install them to ~/.claude/skills/ so they're available in every Claude Code session. Run this to keep all custom skills up to date across machines or after a new skill is added to the repo.
+description: Pull the latest skills from the dw-skills GitHub repo and install them to ~/.claude/skills/ so they're available in every Claude Code session. Run this to keep all custom skills up to date across machines or after a new skill is added to the repo.
 ---
 
 # sync-skills
 
-Syncs the latest custom skills from the `ai_skillz` repo to `~/.claude/skills/`.
+Syncs the latest custom skills from the `dw-skills` repo to `~/.claude/skills/`.
 
 ## What it does
 
-1. Finds (or accepts) the local path to the cloned `ai_skillz` repo
+1. Finds (or accepts) the local path to the cloned `dw-skills` repo
 2. Runs `git pull` to get the latest
 3. Copies all top-level skill directories (everything except `soft_skills/`, `README.md`, `.git`) to `~/.claude/skills/`
 4. Reports what was added, updated, or unchanged
@@ -21,10 +21,10 @@ Syncs the latest custom skills from the `ai_skillz` repo to `~/.claude/skills/`.
 Check the known default first:
 
 ```bash
-ls /Users/dallan/repo/ai_skillz/README.md 2>/dev/null && echo "found"
+ls /Users/dallan/repo/dw-skills/README.md 2>/dev/null && echo "found"
 ```
 
-If not found, ask the user: *"Where is the ai_skillz repo cloned? (default: ~/repo/ai_skillz)"*
+If not found, ask the user: *"Where is the dw-skills repo cloned? (default: ~/repo/dw-skills)"*
 
 ### 2. Pull latest
 
@@ -77,8 +77,6 @@ for skill_dir in "$DEST"/*/; do
 done
 ```
 
-This handles `gt-schema` automatically — its `install.sh` patches the local path to `GT_FIELD_PROVENANCE.md` into the skill definition.
-
 ### 6. Report
 
 ```bash
@@ -92,10 +90,10 @@ Tell the user to restart Claude Code (or open a new session) for newly added ski
 
 - Existing skills are overwritten with the repo version — the repo is the source of truth
 - `soft_skills/` is not synced by default (ask the user if they want them)
-- Skills with supporting files (databricks/, gt-schema/, splunk-search/, etc.) are copied in full
+- Skills with supporting files are copied in full
 
 ## Repo
 
-`https://github.com/dalwagne_adobe/ai_skillz`
+`https://github.com/dallanwagz/dw-skills`
 
-Default local clone: `/Users/dallan/repo/ai_skillz`
+Default local clone: `/Users/dallan/repo/dw-skills`
