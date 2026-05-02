@@ -30,4 +30,5 @@ done
 | `analyze-notebook-outputs` | Export a Databricks notebook with outputs, update markdown commentary, re-import without killing renders |
 | `regen-docs` | Regenerate documentation from a spine config |
 | `dc29-add-app` | Wizard for adding a new app profile to a DC29 button config |
+| `cclean` | Check/install `cclean` — strips `❯` prompts and joins wrapped lines for clean Slack/iMessage pastes |
 | `soft_skills/` | Leadership, management, and strategy skills |
