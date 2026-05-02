@@ -1,16 +1,22 @@
 #!/usr/bin/env bash
-# Installs cclean to ~/.local/bin/cclean
+# Installs cclean to ~/.local/bin/cclean and registers the skill with Claude Code
 
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DEST="$HOME/.local/bin/cclean"
+SKILL_DEST="$HOME/.claude/skills/cclean"
 
 mkdir -p "$HOME/.local/bin"
 cp "$SCRIPT_DIR/cclean.py" "$DEST"
 chmod +x "$DEST"
 
 echo "cclean installed to $DEST"
+
+mkdir -p "$SKILL_DEST"
+cp "$SCRIPT_DIR/SKILL.md" "$SKILL_DEST/SKILL.md"
+
+echo "cclean skill registered at $SKILL_DEST"
 
 if ! echo "$PATH" | tr ':' '\n' | grep -qx "$HOME/.local/bin"; then
     echo ""
