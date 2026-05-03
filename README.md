@@ -31,4 +31,5 @@ done
 | `regen-docs` | Regenerate documentation from a spine config |
 | `dc29-add-app` | Wizard for adding a new app profile to a DC29 button config |
 | `cclean` | Check/install `cclean` — strips `❯` prompts and joins wrapped lines for clean Slack/iMessage pastes |
+| `dei-review` | Package the current prompt + proposed solution as a peer-review request to paste into a *different* LLM, then integrate the feedback critically. Diversity of models, not the HR sense of DEI. |
 | `soft_skills/` | Leadership, management, and strategy skills |
