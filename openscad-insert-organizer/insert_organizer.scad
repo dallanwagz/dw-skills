@@ -1,7 +1,7 @@
 // Parameterized insert organizer
 // Big inserts (18 x 41 x 31) arranged in a row, plus a perpendicular column
-// of small inserts (23 x 11 x 31) replacing what would have been a 6th big
-// insert on the right end.
+// of small inserts (23 x 11 x 31) at the right end. All gaps and borders
+// match the shared spec; the outer X grows to fit.
 
 // ---- Big insert parameters ----
 big_insert_x = 18;   // big insert width  (X, short side)
@@ -21,22 +21,14 @@ floor_thickness = 2; // solid floor below the inserts
 
 $fn = 64;
 
-// ---- Outer box: same envelope as if 6 big inserts were in a row ----
-nominal_slots = num_big + 1;
-outer_x = 2 * border
-        + nominal_slots * big_insert_x
-        + (nominal_slots - 1) * internal_gap;
-outer_y = 2 * border + big_insert_y;
-outer_z = floor_thickness + big_insert_z;
-
-// ---- Small insert column placement ----
-// Width available from the right face of the last big insert to the outer right face.
-last_big_end_x    = border + num_big * big_insert_x + (num_big - 1) * internal_gap;
-small_region_w    = outer_x - last_big_end_x;
-small_x_slack     = small_region_w - small_insert_x;          // leftover after the 23 mm insert
-small_left_wall   = small_x_slack / 2;                         // split slack evenly between
-small_right_wall  = small_x_slack - small_left_wall;           // left wall and right wall
-small_x_origin    = last_big_end_x + small_left_wall;
+// ---- Outer box ----
+// X grows just enough to give the small-insert column a full 3 mm gap to the
+// last big insert and a full 5 mm right border. Y and Z are unchanged.
+last_big_end_x = border + num_big * big_insert_x + (num_big - 1) * internal_gap;
+small_x_origin = last_big_end_x + internal_gap;
+outer_x        = small_x_origin + small_insert_x + border;
+outer_y        = 2 * border + big_insert_y;
+outer_z        = floor_thickness + big_insert_z;
 
 // How many small inserts fit stacked along Y inside the big-insert Y window,
 // using the standard internal_gap between them.
@@ -74,5 +66,3 @@ insert_organizer();
 
 echo(str("Outer: ", outer_x, " x ", outer_y, " x ", outer_z, " mm"));
 echo(str("Small inserts fit: ", num_small));
-echo(str("Small section walls: left=", small_left_wall,
-         " mm, right=", small_right_wall, " mm"));
